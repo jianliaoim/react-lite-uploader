@@ -1,0 +1,19 @@
+
+.trigger, .target {
+  width: 60px;
+  height: 40px;
+  line-height: 40px;
+  background: blue;
+  color: white;
+  text-align: center;
+  display: inline-block;
+}
+
+.uploader-area, .uploader-button {
+  display: inline-block;
+}
+
+.target {
+  width: 400px;
+  height: 100px;
+}

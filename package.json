@@ -1,0 +1,44 @@
+{
+  "name": "react-lite-uploader",
+  "version": "0.0.2",
+  "description": "Uploader plugin menu from Talk by teambition",
+  "main": "lib/index.js",
+  "dependencies": {
+    "classnames": "^1.2.0",
+    "fileapi": "^2.0.10",
+    "react": "^0.13.1"
+  },
+  "devDependencies": {
+    "babel-core": "^5.1.10",
+    "babel-loader": "^5.0.0",
+    "cirru-script": "^0.2.3",
+    "coffee-loader": "^0.7.2",
+    "coffee-script": "^1.9.1",
+    "css-loader": "^0.10.1",
+    "del": "^1.1.1",
+    "gulp": "^3.8.11",
+    "gulp-coffee": "^2.3.1",
+    "run-sequence": "^1.0.2",
+    "stir-template": "^0.1.4",
+    "style-loader": "^0.10.2",
+    "webpack": "^1.8.4",
+    "webpack-dev-server": "^1.8.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "react-component",
+    "uploader"
+  ],
+  "author": "Teambition jiyinyiyong",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/teambition/react-lite-uploader.git"
+  },
+  "bugs": {
+    "url": "https://github.com/teambition/react-lite-uploader/issues"
+  },
+  "homepage": "https://github.com/teambition/react-lite-uploader"
+}
