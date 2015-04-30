@@ -36,9 +36,9 @@ var App = React.createClass({
       onProgress={this.onProgress}
       onSuccess={this.onSuccess}
       onError={this.onError}>
-      <div className="trigger">
-      {'click to upload'}
-      </div>
+        <span className="trigger">
+          {'click to upload'}
+        </span>
       </UploadButton>
   },
   renderArea: function() {
@@ -50,19 +50,23 @@ var App = React.createClass({
       onProgress={this.onProgress}
       onSuccess={this.onSuccess}
       onError={this.onError}>
-      <div className="target">{"drop here"}</div>
+      <div className="target">{"Drop file here"}</div>
       </UploadArea>
   },
   render: function() {
-    return <div className="demo">
-      <div>{'area'}</div>
-      {this.renderArea()}
-      <div>{'button'}</div>
-      {this.renderButton()}
-      <br/>
-      {(this.state.image) ?
-        <img src={this.state.image}/> : undefined
-      }
+    return <div>
+      <div className="demo">
+        <div>{'Drop file only'}</div>
+        {this.renderArea()}
+      </div>
+      <div className="demo">
+        <span>{'Click only '}</span>
+        {this.renderButton()}
+        <br/>
+        {(this.state.image) ?
+          <img src={this.state.image}/> : undefined
+        }
+      </div>
     </div>
   }
 })

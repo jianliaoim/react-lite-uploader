@@ -1,6 +1,7 @@
 
 React = require 'react'
 FileAPI = require 'fileapi'
+classnames = require 'classnames'
 
 mixinUploadHandler = require './mixin-upload'
 
@@ -44,7 +45,10 @@ module.exports = React.createClass
       @uploadFile file
 
   render: ->
-    div className: 'uploader-area',
+    className = classnames 'uploader-area',
+      'is-dropping': @state.isOver
+
+    div className: className,
       @props.children
       if @state.isOver
         div className: 'drop-place'

@@ -14,7 +14,7 @@ var
     stir.doctype
     html null
       head null
-        title null ":React Lite Dropdown"
+        title null ":React Lite Uploader"
         meta $ object (:charset :utf-8)
         link $ object (:rel :icon)
           :href :http://tp4.sinaimg.cn/5592259015/180/5724646064/1
@@ -22,7 +22,7 @@ var
       body null
         div
           object (:class :intro)
-          line ":This is a demo of Lite Dropdown."
+          div (object (:class :title)) ":Demo of Uploader."
           line ":This is the default style used in Talk by Teambition."
           line ":You need to add your own style in your projects."
           div null

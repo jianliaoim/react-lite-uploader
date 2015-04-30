@@ -1,9 +1,21 @@
 
+body {
+  padding: 100px 100px 300px 100px;
+  font-family: Palatino, Optima, Georgia, serif;
+  font-size: 16px;
+  line-height: 1.6em;
+}
+
+.title {
+  font-size: 20px;
+  margin: 20px 0;
+}
+
 .trigger, .target {
-  width: 60px;
+  width: 160px;
   height: 40px;
   line-height: 40px;
-  background: blue;
+  background: hsl(240, 100%, 80%);
   color: white;
   text-align: center;
   display: inline-block;
@@ -16,4 +28,16 @@
 .target {
   width: 400px;
   height: 100px;
+}
+
+.demo {
+  margin: 40px 0;
+}
+
+.uploader-area.is-dropping {
+  font-size: 24px;
+}
+
+.demo img {
+  margin: 40px 0;
 }

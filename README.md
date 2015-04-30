@@ -1,5 +1,5 @@
 
-React Lite Dropdown
+React Lite Uploader
 ----
 
 > This project is experimental, do not use it in production!
@@ -7,6 +7,8 @@ React Lite Dropdown
 Uploader component from Talk by Teambition.
 
 Demo http://teambition.github.io/react-lite-uploader/
+
+Based on the work of https://github.com/mailru/FileAPI
 
 ### Properties
 
