@@ -34,10 +34,19 @@ body {
   margin: 40px 0;
 }
 
+.uploader-area {
+  background-color: hsl(240,80%,90%);
+  padding: 40px;
+}
+
 .uploader-area.is-dropping {
-  font-size: 24px;
+  background-color: hsl(240,80%,80%);
 }
 
 .demo img {
   margin: 40px 0;
+}
+
+.note {
+  margin-top: 40px;
 }

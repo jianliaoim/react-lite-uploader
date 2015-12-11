@@ -6,6 +6,11 @@ UploadButton = React.createFactory require './upload-button'
 
 {div, img, span, br} = React.DOM
 
+if typeof window is 'undefined'
+  config = require '../../config/default'
+else
+  config = window._initialStore
+
 module.exports = React.createClass
   getInitialState: ->
     image: null
@@ -26,7 +31,9 @@ module.exports = React.createClass
 
   renderButton: ->
     UploadButton
-      url: "/"
+      url: config.uploadUrl
+      headers:
+        authorization: config.token
       acceptedFiles: ".gif,.jpg,.jpeg,.bmp,.png"
       multiple: false
       onThumbnail: this.onThumbnail
@@ -37,7 +44,9 @@ module.exports = React.createClass
 
   renderArea: ->
     UploadArea
-      url: "/"
+      url: config.uploadUrl
+      headers:
+        authorization: config.token
       acceptedFiles: ".gif,.jpg,.jpeg,.bmp,.png"
       multiple: false
       onThumbnail: this.onThumbnail
@@ -51,9 +60,11 @@ module.exports = React.createClass
       div className: "demo",
         div null, 'Drop file only'
         this.renderArea()
-      div className="demo",
+      div className: "demo",
         span null, 'Click only '
         this.renderButton()
         br()
         if this.state.image
           img src: this.state.image
+
+        div className: 'note', "Open console find details..."

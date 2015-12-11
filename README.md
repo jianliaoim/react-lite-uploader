@@ -6,7 +6,7 @@ React Lite Uploader
 
 Uploader component from Talk by Teambition.
 
-Demo http://teambition.github.io/react-lite-uploader/
+Demo http://ui.talk.ai/react-lite-uploader
 
 Based on the work of https://github.com/mailru/FileAPI
 
