@@ -7,11 +7,16 @@ webpack = require 'webpack'
 sequence = require 'run-sequence'
 WebpackDevServer = require 'webpack-dev-server'
 
-gulp.task 'script', ->
+
+gulp.task 'del-lib', (cb) ->
+  del = require('del')
+  del 'lib', cb
+
+gulp.task 'script', ['del-lib'], ->
   coffee = require('gulp-coffee')
   gulp
-  .src 'src/*.coffee'
-  .pipe coffee()
+  .src 'src/**/*.coffee'
+  .pipe coffee(bare: true)
   .pipe gulp.dest('lib/')
 
 gulp.task 'rsync', (cb) ->
