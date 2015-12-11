@@ -1,8 +1,10 @@
 
 React = require 'react'
-FileAPI = require 'fileapi'
 
-mixinUploadHandler = require './mixin-upload'
+if typeof window isnt 'undefined'
+  FileAPI = require 'fileapi'
+
+mixinUploadHandler = require '../mixin/upload'
 
 div = React.createFactory 'div'
 input = React.createFactory 'input'
@@ -14,6 +16,7 @@ module.exports = React.createClass
 
   propTypes:
     url: T.string.isRequired
+    headers: T.object
     accept: T.string
     multiple: T.bool
     onThumbnail: T.func
@@ -48,4 +51,3 @@ module.exports = React.createClass
         className: 'file-input', onChange: @onChange, ref: 'input'
         type: 'file', multiple: @props.multiple,
         accept: @props.accept, onClick: @onInputClick
-

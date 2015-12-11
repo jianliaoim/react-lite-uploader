@@ -1,2 +1,7 @@
 
-node_modules/
+/node_modules
+/build
+/index.html
+/lib
+
+/packing/assets.json

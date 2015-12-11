@@ -2,7 +2,7 @@
 React Lite Uploader
 ----
 
-> This project is experimental, do not use it in production!
+> This project is no mature, do not use it in production!
 
 Uploader component from Talk by Teambition.
 
@@ -12,11 +12,11 @@ Based on the work of https://github.com/mailru/FileAPI
 
 ### Properties
 
-Not ready for real project.
+Not ready for production.
 
 ### Supposition
 
-Contains internal bussiness code defined at Teambition.
+Contains internal business logic defined at Talk by Teambition.
 
 ### Usage
 
@@ -26,24 +26,9 @@ npm i --save react-lite-uploader
 
 ### Develop
 
-```text
-npm i
-```
+Based on Jianliao's project template:
 
-You need a static file server for the HTML files. Personally I suggest using Nginx.
-
-Develop:
-
-```bash
-gulp html # regenerate index.html
-webpack-dev-server --hot # enable live-reloading
-```
-
-Build (Pack and optimize js, reivision js and add entry in `index.html`):
-
-```bash
-gulp build
-```
+https://github.com/teambition/coffee-webpack-starter
 
 ### License
 

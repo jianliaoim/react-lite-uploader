@@ -1,5 +1,6 @@
 
-FileAPI = require 'fileapi'
+if typeof window isnt 'undefined'
+  FileAPI = require 'fileapi'
 
 module.exports =
   mockImage: (file, fileCategory) ->
@@ -19,11 +20,12 @@ module.exports =
         imageHeight: 0
         source: 'mock'
         thumbnailUrl: src
-      @props.onThumbnail mocked
+      @props.onThumbnail mocked, file, fileCategory
 
   uploadFile: (file) ->
     file.xhr = FileAPI.upload
       url: @props.url
+      headers: @props.headers
       files:
         file: file
       fileupload: (file, xhr, options) =>

@@ -1,3 +1,3 @@
 
-exports.Area = require('./upload-area')
-exports.Button = require('./upload-button')
+exports.Area = require('./app/upload-area')
+exports.Button = require('./app/upload-button')
