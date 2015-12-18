@@ -29,6 +29,7 @@ module.exports = React.createClass
   getDefaultProps: ->
     multiple: false
     acceptedFiles: undefined
+    onProgress: ->
 
   getInitialState: ->
     isOver: false

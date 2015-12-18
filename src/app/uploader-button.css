@@ -2,6 +2,7 @@
 .uploader-button {
   position: relative;
   cursor: pointer;
+  display: inline-block;
 }
 
 .uploader-button input.file-input {

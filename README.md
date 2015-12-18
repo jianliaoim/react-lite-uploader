@@ -20,6 +20,8 @@ Contains internal business logic defined at Talk by Teambition.
 npm i --save react-lite-uploader
 ```
 
+Remember to include `react-lite-uploader/src/styles.css` in you project.
+
 A small demo of uploaders:
 
 ```coffee

@@ -31,6 +31,7 @@ module.exports = React.createClass
   getDefaultProps: ->
     multiple: false
     acceptedFiles: undefined
+    onProgress: ->
 
   onChange: (event) ->
     files = FileAPI.getFiles event
