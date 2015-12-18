@@ -3,6 +3,10 @@
   position: relative;
 }
 
+.uploader-area:focus {
+  outline: 2px solid hsla(200,90%,50%,0.1);
+}
+
 .uploader-area .drop-place {
   position: absolute;
   width: 100%;

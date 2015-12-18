@@ -17,7 +17,7 @@ module.exports = React.createClass
   propTypes:
     url: T.string.isRequired
     headers: T.object
-    accept: T.string
+    acceptedFiles: T.string
     multiple: T.bool
     onThumbnail: T.func
     onProgress: T.func
@@ -30,7 +30,7 @@ module.exports = React.createClass
 
   getDefaultProps: ->
     multiple: false
-    accept: undefined
+    acceptedFiles: undefined
 
   onChange: (event) ->
     files = FileAPI.getFiles event
@@ -50,4 +50,4 @@ module.exports = React.createClass
       input
         className: 'file-input', onChange: @onChange, ref: 'input'
         type: 'file', multiple: @props.multiple,
-        accept: @props.accept, onClick: @onInputClick
+        acceptedFiles: @props.acceptedFiles, onClick: @onInputClick
