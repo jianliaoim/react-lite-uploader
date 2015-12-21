@@ -34,7 +34,7 @@ module.exports = React.createClass
       url: config.uploadUrl
       headers:
         authorization: config.token
-      acceptedFiles: ".gif,.jpg,.jpeg,.bmp,.png"
+      accept: ".gif,.jpg,.jpeg,.bmp,.png"
       multiple: false
       onThumbnail: this.onThumbnail
       onProgress: this.onProgress
@@ -47,7 +47,7 @@ module.exports = React.createClass
       url: config.uploadUrl
       headers:
         authorization: config.token
-      acceptedFiles: ".gif,.jpg,.jpeg,.bmp,.png"
+      accept: ".gif,.jpg,.jpeg,.bmp,.png"
       multiple: false
       onThumbnail: this.onThumbnail
       onProgress: this.onProgress

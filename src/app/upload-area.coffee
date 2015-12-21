@@ -18,7 +18,7 @@ module.exports = React.createClass
   propTypes:
     url: T.string.isRequired
     headers: T.object
-    acceptedFiles: T.string
+    accept: T.string
     multiple: T.bool
     onThumbnail: T.func
     onProgress: T.func
@@ -28,7 +28,7 @@ module.exports = React.createClass
 
   getDefaultProps: ->
     multiple: false
-    acceptedFiles: undefined
+    accept: undefined
     onProgress: ->
 
   getInitialState: ->
@@ -50,12 +50,12 @@ module.exports = React.createClass
 
   onPaste: (event) ->
     clipboardData = event.clipboardData
-    acceptedFiles = @props.acceptedFiles.split(',')
+    accept = @props.accept.split(',')
     .map (extension) -> extension.slice(1)
 
     Array::forEach.call clipboardData.types, (type, i) =>
       if type is 'Files'
-        matchFile = acceptedFiles.some (extension) ->
+        matchFile = accept.some (extension) ->
           fileType = clipboardData.items[i].type
           fileType.indexOf(extension) >= 0
         if matchFile
