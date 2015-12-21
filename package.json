@@ -1,6 +1,6 @@
 {
   "name": "react-lite-uploader",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "Uploader plugin menu from Talk by teambition",
   "main": "lib/index.js",
   "dependencies": {
