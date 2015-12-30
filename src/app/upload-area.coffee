@@ -61,7 +61,12 @@ module.exports = React.createClass
         if matchFile
           pastedFileName = 'pasted'
           # Blob to File http://stackoverflow.com/q/27159179/883571
-          file = new File [clipboardData.items[i].getAsFile()], pastedFileName
+          if window.File?
+            file = new File [clipboardData.items[i].getAsFile()], pastedFileName
+          else
+            file = clipboardData.items[i].getAsFile()
+            file.lastModifiedDate = new Date()
+            file.name = pastedFileName
           @uploadFile file
 
   render: ->
