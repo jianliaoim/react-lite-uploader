@@ -1,6 +1,9 @@
 
 React = require 'react'
 
+if typeof window isnt 'undefined'
+  FileAPI = require 'fileapi'
+
 UploadArea = React.createFactory require './upload-area'
 UploadButton = React.createFactory require './upload-button'
 
@@ -15,18 +18,21 @@ module.exports = React.createClass
   getInitialState: ->
     image: null
 
-  onThumbnail: (data) ->
-    console.log('onThumbnail:', data)
-    this.setState image: data.downloadUrl
+  onCreate: (file, fileId) ->
+    console.log('onCreate:', file, fileId)
+    image = FileAPI.Image file
+    image.preview 200, 200
+    image.get (err, imageEL) =>
+      @setState image: imageEL.toDataURL()
 
-  onSuccess: (data) ->
-    console.log('onSuccess:', data)
+  onSuccess: (data, fileId) ->
+    console.log('onSuccess:', data, fileId)
 
-  onProgress: (data) ->
-    console.log('onProgress:', data)
+  onProgress: (loaded, total, fileId) ->
+    console.log('onProgress:', loaded, total, fileId)
 
-  onError: (data) ->
-    console.log('onError:', data)
+  onError: (data, fileId) ->
+    console.log('onError:', data, fileId)
     alert('file server is not finished yet..')
 
   renderButton: ->
@@ -36,7 +42,7 @@ module.exports = React.createClass
         authorization: config.token
       accept: ".gif,.jpg,.jpeg,.bmp,.png"
       multiple: false
-      onThumbnail: this.onThumbnail
+      onCreate: this.onCreate
       onProgress: this.onProgress
       onSuccess: this.onSuccess
       onError: this.onError
@@ -49,7 +55,7 @@ module.exports = React.createClass
         authorization: config.token
       accept: ".gif,.jpg,.jpeg,.bmp,.png"
       multiple: false
-      onThumbnail: this.onThumbnail
+      onCreate: this.onCreate
       onProgress: this.onProgress
       onSuccess: this.onSuccess
       onError: this.onError

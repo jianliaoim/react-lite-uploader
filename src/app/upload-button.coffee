@@ -4,7 +4,7 @@ React = require 'react'
 if typeof window isnt 'undefined'
   FileAPI = require 'fileapi'
 
-mixinUploadHandler = require '../mixin/upload'
+uploadUtil = require '../upload-util'
 
 div = React.createFactory 'div'
 input = React.createFactory 'input'
@@ -12,14 +12,13 @@ T = React.PropTypes
 
 module.exports = React.createClass
   displayName: 'uploader-button'
-  mixins: [mixinUploadHandler]
 
   propTypes:
     url: T.string.isRequired
     headers: T.object
     accept: T.string
     multiple: T.bool
-    onThumbnail: T.func
+    onCreate: T.func
     onProgress: T.func
     onSuccess: T.func
     onError: T.func
@@ -36,7 +35,7 @@ module.exports = React.createClass
   onChange: (event) ->
     files = FileAPI.getFiles event
     files.forEach (file) =>
-      @uploadFile file
+      uploadUtil.uploadFile file, @props
 
   onClick: ->
     @_inputEl.click()
