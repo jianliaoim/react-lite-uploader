@@ -31,14 +31,15 @@ module.exports =
 
     Array::forEach.call clipboardData.types, (type, i) =>
       if type is 'Files'
+        fileType = clipboardData.items[i].type
         matchFile = accept.some (extension) ->
-          fileType = clipboardData.items[i].type
           fileType.indexOf(extension) >= 0
         if matchFile
           copiedName = 'copy-paste'
           # Blob to File http://stackoverflow.com/q/27159179/883571
           if window.File?
-            file = new File [clipboardData.items[i].getAsFile()], copiedName
+            fileBlob = clipboardData.items[i].getAsFile()
+            file = new File [fileBlob], copiedName, type: fileType
           else
             file = clipboardData.items[i].getAsFile()
             file.lastModifiedDate = new Date()
