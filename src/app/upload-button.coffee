@@ -20,8 +20,8 @@ module.exports = React.createClass
     multiple: T.bool
     onCreate: T.func
     onProgress: T.func
-    onSuccess: T.func
-    onError: T.func
+    onSuccess: T.func.isRequired
+    onError: T.func.isRequired
     # children
 
   componentDidMount: ->
@@ -29,8 +29,7 @@ module.exports = React.createClass
 
   getDefaultProps: ->
     multiple: false
-    accept: undefined
-    onProgress: ->
+    accept: ''
 
   onChange: (event) ->
     files = FileAPI.getFiles event

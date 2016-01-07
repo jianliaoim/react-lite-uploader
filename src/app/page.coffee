@@ -6,8 +6,9 @@ if typeof window isnt 'undefined'
 
 UploadArea = React.createFactory require './upload-area'
 UploadButton = React.createFactory require './upload-button'
+uploadUtil = require '../upload-util'
 
-{div, img, span, br} = React.DOM
+{div, img, span, br, textarea} = React.DOM
 
 if typeof window is 'undefined'
   config = require '../../config/default'
@@ -18,12 +19,27 @@ module.exports = React.createClass
   getInitialState: ->
     image: null
 
+  componentDidMount: ->
+    uploadUtil.handleFileDropping @refs.text.getDOMNode(),
+      url: config.uploadUrl
+      headers:
+        authorization: config.token
+      accept: ".gif,.jpg,.jpeg,.bmp,.png"
+      multiple: false
+      onCreate: @onCreate
+      onProgress: @onProgress
+      onSuccess: @onSuccess
+      onError: @onError
+
   onCreate: (file, fileId) ->
     console.log('onCreate:', file, fileId)
     image = FileAPI.Image file
     image.preview 200, 200
     image.get (err, imageEL) =>
-      @setState image: imageEL.toDataURL()
+      if err
+        console.error 'err', err
+      else
+        @setState image: imageEL.toDataURL()
 
   onSuccess: (data, fileId) ->
     console.log('onSuccess:', data, fileId)
@@ -32,8 +48,19 @@ module.exports = React.createClass
     console.log('onProgress:', loaded, total, fileId)
 
   onError: (data, fileId) ->
-    console.log('onError:', data, fileId)
-    alert('file server is not finished yet..')
+    console.error('onError:', data, fileId)
+
+  onPaste: (event) ->
+    uploadUtil.handlePasteEvent event.nativeEvent,
+      url: config.uploadUrl
+      headers:
+        authorization: config.token
+      accept: ".gif,.jpg,.jpeg,.bmp,.png"
+      multiple: false
+      onCreate: this.onCreate
+      onProgress: this.onProgress
+      onSuccess: this.onSuccess
+      onError: this.onError
 
   renderButton: ->
     UploadButton
@@ -59,7 +86,7 @@ module.exports = React.createClass
       onProgress: this.onProgress
       onSuccess: this.onSuccess
       onError: this.onError
-      div className="target", "Drop file here"
+      div className: "target", "Drop file here"
 
   render: ->
     div null,
@@ -72,5 +99,7 @@ module.exports = React.createClass
         br()
         if this.state.image
           img src: this.state.image
-
+      div className: 'demo',
+        textarea ref: 'text', onPaste: @onPaste
+      div className: 'demo',
         div className: 'note', "Open console find details..."
