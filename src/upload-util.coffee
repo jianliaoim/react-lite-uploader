@@ -68,7 +68,10 @@ module.exports =
       return props.onError type: 'too-many-files', data: 'Too many files selected'
     # throw error if accepted types is not satisfied
     if props.accept.trim().length > 0
-      acceptTypes = props.accept.split(',').map (extension) -> extension.slice(1)
+      acceptTypes = props.accept.split(',').map (extension) ->
+        if extension[0] is '.'
+          extension.slice(1)
+        else extension
       allTypesOk = files.every (file) ->
         acceptTypes.some (extension) ->
           file.type.split('/').indexOf(extension) >= 0

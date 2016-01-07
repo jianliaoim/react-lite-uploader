@@ -33,8 +33,7 @@ module.exports = React.createClass
 
   onChange: (event) ->
     files = FileAPI.getFiles event
-    files.forEach (file) =>
-      uploadUtil.uploadFile file, @props
+    uploadUtil.onFilesLoad files, @props
 
   onClick: ->
     @_inputEl.click()
