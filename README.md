@@ -46,6 +46,7 @@ Notice: `UploadArea` is not suggested due to the lack of flexibility, use `uploa
 
 * `uploadUtil.handleFileDropping` `(event, props) ->`
 * `uploadUtil.handlePasteEvent` `(targetElement, props) ->`
+* `uploadUtil.onFilesLoad` `(files, props) ->`
 
 Remember to include `react-lite-uploader/src/styles.css` in you project.
 

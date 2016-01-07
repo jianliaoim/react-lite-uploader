@@ -4,6 +4,13 @@ shortid = require 'shortid'
 if typeof window isnt 'undefined'
   FileAPI = require 'fileapi'
 
+checkDefaultProps = (props) ->
+  if not props.accept?
+    props.accept = ''
+  if not props.multiple?
+    props.multiple = false
+  props
+
 module.exports =
   uploadFile: (file, props) ->
     fileId = shortid.generate()
@@ -52,6 +59,7 @@ module.exports =
     FileAPI.event.dnd target, onFileHover, onFilesLoad
 
   onFilesLoad: (files, props) ->
+    props = checkDefaultProps props
     # throw error if no file is available
     if files.length is 0
       return props.onError type: 'no-file', data: 'No file available'
@@ -59,12 +67,13 @@ module.exports =
     if (not props.multiple) and files.length > 1
       return props.onError type: 'too-many-files', data: 'Too many files selected'
     # throw error if accepted types is not satisfied
-    acceptTypes = props.accept.split(',').map (extension) -> extension.slice(1)
-    allTypesOk = files.every (file) ->
-      acceptTypes.some (extension) ->
-        file.type.split('/').indexOf(extension) >= 0
-    if (not allTypesOk)
-      return props.onError type: 'invalid-type', data: 'Invalid file type'
+    if props.accept.trim().length > 0
+      acceptTypes = props.accept.split(',').map (extension) -> extension.slice(1)
+      allTypesOk = files.every (file) ->
+        acceptTypes.some (extension) ->
+          file.type.split('/').indexOf(extension) >= 0
+      if (not allTypesOk)
+        return props.onError type: 'invalid-type', data: 'Invalid file type'
 
     files.forEach (file) =>
       @uploadFile file, props
