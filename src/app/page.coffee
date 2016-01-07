@@ -94,12 +94,12 @@ module.exports = React.createClass
         div null, 'Drop file only'
         this.renderArea()
       div className: "demo",
-        span null, 'Click only '
+        span null, 'Click only: '
         this.renderButton()
         br()
         if this.state.image
           img src: this.state.image
       div className: 'demo',
-        textarea ref: 'text', onPaste: @onPaste
+        textarea ref: 'text', onPaste: @onPaste, placeholder: 'Drop or Paste'
       div className: 'demo',
         div className: 'note', "Open console find details..."
