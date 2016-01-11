@@ -36,7 +36,6 @@ body {
 
 .uploader-area {
   background-color: hsl(240,80%,90%);
-  padding: 40px;
 }
 
 .uploader-area.is-dropping {

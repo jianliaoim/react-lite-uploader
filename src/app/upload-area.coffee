@@ -1,5 +1,6 @@
 
 React = require 'react'
+assign = require 'object-assign'
 classnames = require 'classnames'
 
 if typeof window isnt 'undefined'
@@ -21,14 +22,13 @@ module.exports = React.createClass
     multiple: T.bool
     onCreate: T.func
     onProgress: T.func
-    onSuccess: T.func
-    onError: T.func
+    onSuccess: T.func.isRequired
+    onError: T.func.isRequired
     # children
 
   getDefaultProps: ->
     multiple: false
-    accept: undefined
-    onProgress: ->
+    accept: ''
 
   getInitialState: ->
     isOver: false
@@ -38,17 +38,14 @@ module.exports = React.createClass
     @initFileListener()
 
   initFileListener: ->
-    FileAPI.event.dnd @_rootEl, @onIsHover, @onFilesLoad
+    uploadUtil.handleFileDropping @_rootEl,
+      assign onFileHover: @onIsHover, @props
 
   onIsHover: (isOver) ->
     @setState isOver: isOver
 
-  onFilesLoad: (files) ->
-    files.forEach (file) =>
-      uploadUtil.uploadFile file, @props
-
   onPaste: (event) ->
-    uploadUtil.handlePasteEvent event, @props
+    uploadUtil.handlePasteEvent event.nativeEvent, @props
 
   render: ->
     className = classnames 'uploader-area',

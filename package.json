@@ -6,6 +6,7 @@
   "dependencies": {
     "classnames": "^1.2.0",
     "fileapi": "^2.0.17",
+    "object-assign": "^4.0.1",
     "react": "^0.13.1",
     "shortid": "^2.2.4"
   },
