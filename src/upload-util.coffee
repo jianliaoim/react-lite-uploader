@@ -14,6 +14,9 @@ checkDefaultProps = (props) ->
 module.exports =
   uploadFile: (file, props) ->
     fileId = shortid.generate()
+    # this private event hook is tricky,
+    # but we need it to modify headers
+    props.beforeUpload? props
 
     file.xhr = FileAPI.upload
       url: props.url
@@ -25,7 +28,8 @@ module.exports =
       fileprogress: (event, file, xhr, options) =>
         props.onProgress? event.loaded, event.total, fileId
       filecomplete: (err, xhr, file, options) =>
-        if err?
+        # err is a boolean, strange style from fileapi, be cautious!
+        if err
           errorDetails =
             type: 'failed-upload', data: err
             xhr: xhr, file: file, options: options
