@@ -25,11 +25,20 @@ module.exports =
       fileprogress: (event, file, xhr, options) =>
         props.onProgress? event.loaded, event.total, fileId
       filecomplete: (err, xhr, file, options) =>
-        try
-          data = JSON.parse xhr.responseText
-          props.onSuccess data, fileId
-        catch error
-          props.onError {type: 'failed-upload', data: error}, fileId
+        if err?
+          errorDetails =
+            type: 'failed-upload', data: err
+            xhr: xhr, file: file, options: options
+          props.onError errorDetails, fileId
+        else
+          try
+            data = JSON.parse xhr.responseText
+            props.onSuccess data, fileId
+          catch error
+            errorDetails =
+              type: 'failed-parsing-result', data: error
+              xhr: xhr, file: file, options: options
+            props.onError errorDetails, fileId
 
   handlePasteEvent: (event, props) ->
     clipboardData = event.clipboardData
@@ -51,7 +60,7 @@ module.exports =
     maybeFiles = maybeFiles.filter (file) -> file?
     if maybeFiles.length > 0
       event.preventDefault()
-    @onFilesLoad maybeFiles, props
+      @onFilesLoad maybeFiles, props
 
   handleFileDropping: (target, props) ->
     onFilesLoad = (files) => @onFilesLoad files, props
