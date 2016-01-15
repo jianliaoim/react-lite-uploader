@@ -16,9 +16,6 @@ checkDefaultProps = (props) ->
 module.exports =
   uploadFile: (file, props) ->
     fileId = shortid.generate()
-    # this private event hook is tricky,
-    # but we need it to modify headers
-    props.beforeUpload? props
 
     file.xhr = FileAPI.upload
       url: props.url
