@@ -21,6 +21,10 @@ body {
   display: inline-block;
 }
 
+.trigger {
+  cursor: pointer;
+}
+
 .uploader-area, .uploader-button {
   display: inline-block;
 }

@@ -5,7 +5,6 @@ if typeof window isnt 'undefined'
   FileAPI = require 'fileapi'
 
 UploadArea = React.createFactory require './upload-area'
-UploadButton = React.createFactory require './upload-button'
 uploadUtil = require '../upload-util'
 
 {div, img, span, br, textarea} = React.DOM
@@ -62,8 +61,8 @@ module.exports = React.createClass
       onSuccess: this.onSuccess
       onError: this.onError
 
-  renderButton: ->
-    UploadButton
+  onClickUpload: ->
+    uploadUtil.handleClick
       url: config.uploadUrl
       headers:
         authorization: config.token
@@ -73,7 +72,9 @@ module.exports = React.createClass
       onProgress: this.onProgress
       onSuccess: this.onSuccess
       onError: this.onError
-      span className="trigger", 'click to upload'
+
+  renderButton: ->
+    span className: "trigger", onClick: @onClickUpload, 'click to upload'
 
   renderArea: ->
     UploadArea
