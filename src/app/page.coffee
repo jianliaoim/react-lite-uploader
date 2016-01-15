@@ -76,7 +76,6 @@ module.exports = React.createClass
       onError: this.onError
 
   onFileHover: (isHover) ->
-    console.log isHover
     if isHover isnt @state.isHover
       @setState isHover: isHover
 

@@ -23,7 +23,7 @@ module.exports = (info) ->
   resolve: extensions: ['.js', '.coffee', '']
   module:
     loaders: [
-      {test: /\.coffee$/, loader: 'react-hot!coffee'}
+      {test: /\.coffee$/, loader: 'coffee'}
       {test: /\.less$/, loader: 'style!css!less'}
       {test: /\.css$/, loader: 'style!css!autoprefixer'}
       {test: /\.(eot|woff|woff2|ttf|svg)((\?|\#)[\?\#\w\d_-]+)?$/, loader: "url", query: {limit: 100, name: fontName}}
