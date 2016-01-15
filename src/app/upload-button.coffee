@@ -31,9 +31,26 @@ module.exports = React.createClass
     multiple: false
     accept: ''
 
+  onSuccess: (args...) ->
+    @_inputEl.value = null
+    @props.onSuccess args...
+
+  onError: (args...) ->
+    @_inputEl.value = null
+    @props.onError args...
+
   onChange: (event) ->
     files = FileAPI.getFiles event
-    uploadUtil.onFilesLoad files, @props
+    props =
+      url: @props.url
+      headers: @props.headers
+      accept: @props.accept
+      multiple: @props.multiple
+      onCreate: @props.onCreate
+      onProgress: @props.onProgress
+      onSuccess: @onSuccess
+      onError: @onError
+    uploadUtil.onFilesLoad files, props
 
   onClick: ->
     @_inputEl.click()
