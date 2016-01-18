@@ -1,10 +1,14 @@
 
 React = require 'react'
 
-require './app/uploader-button.css'
-require './app/uploader-area.css'
 require './demo.css'
 
-App = React.createFactory require './app/page'
+render = ->
+  App = React.createFactory require './app/page'
+  React.render App(), document.querySelector('.demo')
 
-React.render App(), document.querySelector('.demo')
+render()
+
+if module.hot
+  module.hot.accept './app/page', ->
+    render()

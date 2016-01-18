@@ -3,6 +3,8 @@ shortid = require 'shortid'
 
 if typeof window isnt 'undefined'
   FileAPI = require 'fileapi'
+  gloablInputButton = document.createElement 'input'
+  gloablInputButton.type = 'file'
 
 checkDefaultProps = (props) ->
   if not props.accept?
@@ -14,9 +16,6 @@ checkDefaultProps = (props) ->
 module.exports =
   uploadFile: (file, props) ->
     fileId = shortid.generate()
-    # this private event hook is tricky,
-    # but we need it to modify headers
-    props.beforeUpload? props
 
     file.xhr = FileAPI.upload
       url: props.url
@@ -93,3 +92,24 @@ module.exports =
 
     files.forEach (file) =>
       @uploadFile file, props
+
+  handleInputChange: (event, props) ->
+    files = FileAPI.getFiles event
+    @onFilesLoad files, props
+
+  handleClick: (props) ->
+    gloablInputButton.multiple = props.multiple
+    gloablInputButton.accept = props.accept
+    gloablInputButton.click()
+    gloablInputButton.onchange = (event) =>
+      # rewrite method to inject null value
+      oldOnSuccess = props.onSuccess
+      oldOnError = props.onError
+      props.onSuccess = (args...) ->
+        oldOnSuccess args...
+        gloablInputButton.value = null
+      props.onError = (args...) ->
+        oldOnError args...
+        gloablInputButton.value = null
+
+      @handleInputChange event, props

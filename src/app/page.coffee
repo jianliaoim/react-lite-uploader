@@ -4,8 +4,6 @@ React = require 'react'
 if typeof window isnt 'undefined'
   FileAPI = require 'fileapi'
 
-UploadArea = React.createFactory require './upload-area'
-UploadButton = React.createFactory require './upload-button'
 uploadUtil = require '../upload-util'
 
 {div, img, span, br, textarea} = React.DOM
@@ -18,6 +16,7 @@ else
 module.exports = React.createClass
   getInitialState: ->
     image: null
+    showCover: false
 
   componentDidMount: ->
     uploadUtil.handleFileDropping @refs.text.getDOMNode(),
@@ -30,6 +29,8 @@ module.exports = React.createClass
       onProgress: @onProgress
       onSuccess: @onSuccess
       onError: @onError
+
+    FileAPI.event.dnd @refs.drop.getDOMNode(), @onFileHover, @onFilesLoad
 
   onCreate: (file, fileId) ->
     console.log('onCreate:', file, fileId)
@@ -62,8 +63,8 @@ module.exports = React.createClass
       onSuccess: this.onSuccess
       onError: this.onError
 
-  renderButton: ->
-    UploadButton
+  onClickUpload: (event) ->
+    uploadUtil.handleClick
       url: config.uploadUrl
       headers:
         authorization: config.token
@@ -73,20 +74,30 @@ module.exports = React.createClass
       onProgress: this.onProgress
       onSuccess: this.onSuccess
       onError: this.onError
-      span className="trigger", 'click to upload'
+
+  onFileHover: (isHover) ->
+    if isHover isnt @state.isHover
+      @setState isHover: isHover
+
+  onFilesLoad: (files) ->
+    uploadUtil.onFilesLoad files,
+      url: config.uploadUrl
+      headers:
+        authorization: config.token
+      accept: ".gif,.jpg,.jpeg,.bmp,.png"
+      multiple: false
+      onCreate: this.onCreate
+      onProgress: this.onProgress
+      onSuccess: this.onSuccess
+      onError: this.onError
+
+  renderButton: ->
+    span className: "trigger", onClick: @onClickUpload, 'click to upload'
 
   renderArea: ->
-    UploadArea
-      url: config.uploadUrl
-      headers:
-        authorization: config.token
-      accept: ".gif,.jpg,.jpeg,.bmp,.png"
-      multiple: false
-      onCreate: this.onCreate
-      onProgress: this.onProgress
-      onSuccess: this.onSuccess
-      onError: this.onError
-      div className: "target", "Drop file here"
+    div className: "target", ref: 'drop', "Drop file here",
+      if @state.isHover
+        div className: 'drop-place'
 
   render: ->
     div null,
