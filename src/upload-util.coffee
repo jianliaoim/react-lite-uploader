@@ -20,6 +20,8 @@ module.exports =
     file.xhr = FileAPI.upload
       url: props.url
       headers: props.headers
+      data:
+        size: file.size
       files:
         file: file
       fileupload: (file, xhr, options) =>
