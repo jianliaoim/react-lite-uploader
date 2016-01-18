@@ -36,14 +36,18 @@ module.exports =
             xhr: xhr, file: file, options: options
           props.onError errorDetails, fileId
         else
+          data = null
+          isDataParsed = false
           try
             data = JSON.parse xhr.responseText
-            props.onSuccess data, fileId
+            isDataParsed = true
           catch error
             errorDetails =
               type: 'failed-parsing-result', data: error
               xhr: xhr, file: file, options: options
             props.onError errorDetails, fileId
+          if isDataParsed
+            props.onSuccess data, fileId
 
   handlePasteEvent: (event, props) ->
     clipboardData = event.clipboardData
